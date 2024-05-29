@@ -1,3 +1,104 @@
+GraphQL Spring Boot Application with MongoDB and Cursor-Based Pagination
+
+This repository contains a Spring Boot application with GraphQL, MongoDB, and Lombok. The application demonstrates cursor-based pagination for handling large datasets.
+Prerequisites
+
+    Java 17
+    MongoDB
+    Gradle
+
+Project Setup
+
+    Clone the Repository:
+
+    sh
+
+git clone https://github.com/yourusername/graphql-spring-boot-mongodb.git
+cd graphql-spring-boot-mongodb
+
+Configure MongoDB:
+Ensure MongoDB is running locally on the default port (27017).
+
+Update Application Properties:
+src/main/resources/application.properties
+
+properties
+
+spring.data.mongodb.uri=mongodb://localhost:27017/graphql_db
+spring.graphql.schema.printer.enabled=true
+server.port=8085
+
+Build the Project:
+
+sh
+
+./gradlew build
+
+Run the Application:
+
+sh
+
+    ./gradlew bootRun
+
+GraphQL Endpoints
+Queries
+
+Fetch Users with Pagination:
+
+graphql
+
+query {
+  users(first: 10) {
+    edges {
+      cursor
+      node {
+        _id
+        name
+        email
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
+
+Fetch Next Set of Users:
+
+graphql
+
+query {
+  users(first: 10, after: "END_CURSOR_FROM_PREVIOUS_RESULT") {
+    edges {
+      cursor
+      node {
+        _id
+        name
+        email
+      }
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}
+
+Mutations
+
+Create a New User:
+
+graphql
+
+mutation {
+  createUser(name: "Jane Doe", email: "jane.doe@example.com") {
+    _id
+    name
+    email
+  }
+}
+
 To create a demo users collection in MongoDB and 1000 data points
 
 const documents = [];
