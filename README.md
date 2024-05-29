@@ -7,14 +7,6 @@ Prerequisites
     MongoDB
     Gradle
 
-Project Setup
-
-    Clone the Repository:
-
-    sh
-
-git clone https://github.com/yourusername/graphql-spring-boot-mongodb.git
-cd graphql-spring-boot-mongodb
 
 Configure MongoDB:
 Ensure MongoDB is running locally on the default port (27017).
@@ -40,7 +32,7 @@ sh
 
     ./gradlew bootRun
 
-GraphQL Endpoints
+GraphQL Endpoints http://127.0.0.1:8085/graphiql
 Queries
 
 Fetch Users with Pagination:
@@ -85,19 +77,6 @@ query {
   }
 }
 
-Mutations
-
-Create a New User:
-
-graphql
-
-mutation {
-  createUser(name: "Jane Doe", email: "jane.doe@example.com") {
-    _id
-    name
-    email
-  }
-}
 
 To create a demo users collection in MongoDB and 1000 data points
 
